@@ -55,6 +55,7 @@ html_Template = Template('''<!DOCTYPE html>
 </html>''')
 
 
+
 # Sustitución de la "variable" definida en el html como "$body", por el contenido que nos interesa (imágenes, nombre en español y nombre en inglés), el que se encuentra en la variable "body_content":
 
 html = html_Template.substitute(body = body_content)
