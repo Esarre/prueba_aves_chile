@@ -17,10 +17,16 @@ out = request_get("https://aves.ninjas.cl/api/birds")
 
 # Templates ("plantillas"):
 
+    # Plantilla para el contenido (imagen, nombre en español, nombre en inglés):
+
 img_template = Template("<div class='row mx-auto col-3'><img src='$url'><h5 class='text-white'>Nombre:</h5><p class='text-white'>Espanol: '$name_sp'</p><p class='text-white'>Ingles: '$name_en'</p></div>")
+
+
+    # Comienzo de la iteración del contenido (un string vacío):
 
 body_content = " "
 
+    # Iteración que permite obtener la información en el orden imagen - nombre en español - nombre en inglés. Por cada iteraciíon, el contenido se irá almacenando en la variable "body_content":
 for ave in out:
     imagen_url = ave["images"]["main"]
     nombre_sp = ave["name"]["spanish"]
@@ -29,6 +35,7 @@ for ave in out:
     body_content += img_template.substitute(url=imagen_url, name_sp=nombre_sp, name_en=nombre_en)
 
 
+    # Plantilla con el formato para crear el archivo html:
 
 html_Template = Template('''<!DOCTYPE html>
 <html lang="en">
@@ -48,9 +55,17 @@ html_Template = Template('''<!DOCTYPE html>
 </html>''')
 
 
+# Sustitución de la "variable" definida en el html como "$body", por el contenido que nos interesa (imágenes, nombre en español y nombre en inglés), el que se encuentra en la variable "body_content":
 
 html = html_Template.substitute(body = body_content)
 print(html)
+# Todo el contenido, entonces, se almacena en la variable "html", y se procede a imprimir por consola con el "print(html)" para aplicar los cambios.
+
+
+
+# Con el siguiente código, se procede a definir que cuando se corra el programa, se cree ("escriba") un archivo "index.html" que tenga el formato html que almacena la variable con el nombre "html":
 
 with open("index.html", "w") as f:
     f.write(html)
+
+# Entonces, si queremos realizar algún cambio al código, para que estos cambios los podamos ver en el navegador debemos correr el programa para que se genere un nuevo archivo "index.html" (que en realidad no se genera uno nuevo, sino que al existir un archivo "index.html" generado con anterioridad solo se sobreescribe; ahora, si borramos el archivo "index.html" y corremos el programa, en este caso se creará un nuevo archivo).
