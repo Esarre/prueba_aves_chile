@@ -19,7 +19,7 @@ out = request_get("https://aves.ninjas.cl/api/birds")
 
     # Plantilla para el contenido (imagen, nombre en español, nombre en inglés):
 
-img_template = Template("<div class='row mx-auto col-3'>\n<img src='$url'><h5 class='text-white'>Nombre:</h5>\n<p class='text-white'>Espanol: '$name_sp'</p>\n<p class='text-white'>Ingles: '$name_en'</p>\n</div>")
+img_template = Template("<div class='row mx-auto col-3'>\n<img src='$url'>\n<h5 class='text-white'>Nombre:</h5>\n<p class='text-white'>Espanol: '$name_sp'</p>\n<p class='text-white'>Ingles: '$name_en'</p>\n</div>\n")
 
 
     # Comienzo de la iteración del contenido (un string vacío):
