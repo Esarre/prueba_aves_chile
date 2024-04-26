@@ -19,7 +19,7 @@ out = request_get("https://aves.ninjas.cl/api/birds")
 
     # Plantilla para el contenido (imagen, nombre en español, nombre en inglés):
 
-img_template = Template("<div class='row mx-auto col-3'>\n<img src='$url'>\n<h5 class='text-white'>Nombre:</h5>\n<p class='text-white'>Espanol: '$name_sp'</p>\n<p class='text-white'>Ingles: '$name_en'</p>\n</div>\n")
+img_template = Template("<div class='row mx-auto col-3'>\n    <img src='$url'>\n    <h5 class='text-white'>Nombre:</h5>\n    <p class='text-white'>Espanol: '$name_sp'</p>\n    <p class='text-white'>Ingles: '$name_en'</p>\n    </div>\n")
 
 
     # Comienzo de la iteración del contenido (un string vacío):
@@ -37,6 +37,11 @@ for ave in out:
 
     # Plantilla con el formato para crear el archivo html:
 
+with open("template.html", "r") as f:
+    template = f.read()
+
+
+"""
 html_Template = Template('''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,13 +58,18 @@ html_Template = Template('''<!DOCTYPE html>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>''')
-
+"""
 
 
 # Sustitución de la "variable" definida en el html como "$body", por el contenido que nos interesa (imágenes, nombre en español y nombre en inglés), el que se encuentra en la variable "body_content":
 
+html = template.replace("$body", body_content)
+
+"""
 html = html_Template.substitute(body = body_content)
 print(html)
+"""
+
 # Todo el contenido, entonces, se almacena en la variable "html", y se procede a imprimir por consola con el "print(html)" para aplicar los cambios.
 
 
@@ -70,3 +80,5 @@ with open("index.html", "w") as f:
     f.write(html)
 
 # Entonces, si queremos realizar algún cambio al código, para que estos cambios los podamos ver en el navegador debemos correr el programa para que se genere un nuevo archivo "index.html" (que en realidad no se genera uno nuevo, sino que al existir un archivo "index.html" generado con anterioridad solo se sobreescribe; ahora, si borramos el archivo "index.html" y corremos el programa, en este caso se creará un nuevo archivo).
+
+print("Archivo index.html creado con éxito")
